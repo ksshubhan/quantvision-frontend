@@ -1,0 +1,160 @@
+/* === Global Layout === */
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100dvh;
+  background-color: #ffffff;
+  color: #1a1a1a;
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  overflow: hidden !important;
+}
+
+/* === Headings === */
+h1, h3 {
+  font-weight: 700;
+  color: #000000;
+}
+
+/* === Button Glow Effect === */
+button {
+  background: linear-gradient(135deg, #007bff, #00d4ff);
+  border: none;
+  color: white;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 122, 255, 0.3);
+}
+
+/* === Dashboard Layout === */
+.dashboard-layout {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  width: 100%;
+  max-width: 1200px;
+  margin-top: -1rem;
+}
+
+/* === Chart (Left) === */
+.chart-panel {
+  flex: 2;
+  height: 460px; /* fixed height for chart */
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* === Controls + Metrics (Right) === */
+.right-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* === Controls Section === */
+.controls {
+  background: #ffffff;
+  padding: 24px 30px;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+  width: 260px;
+}
+
+.controls label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+  color: #111;
+  margin-bottom: 12px;
+}
+
+.controls select {
+  background-color: #111;
+  color: white;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 8px 10px;
+  width: 100%;
+  max-width: 200px;
+  font-weight: 500;
+  appearance: none;
+  cursor: pointer;
+}
+
+.controls select:disabled,
+.controls option[value=""] {
+  color: #888;  /* makes the placeholder lighter */
+}
+
+/* === Metrics Section === */
+/* === Metric Section (Modernized) === */
+.metrics-container {
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.05);
+  width: 280px;
+  padding: 28px 32px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  transition: all 0.3s ease;
+}
+
+.metrics-container:hover {
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.metrics-container h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 75px;
+  color: #000;
+}
+
+/* Metric labels and values */
+.metrics-container p {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 0.95rem;
+  margin: 8px 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #f3f3f3;
+}
+
+.metrics-container p:last-child {
+  border-bottom: none;
+}
+
+.metrics-container strong {
+  color: #000;
+  font-weight: 600;
+}
+
+/* Optional accent for metric numbers */
+.metrics-container p span {
+  color: #111;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+
+button[title]:hover::after {
+  transition-delay: 0s !important;
+}
