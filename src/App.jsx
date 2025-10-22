@@ -41,16 +41,11 @@ function App() {
   const isPositiveTrend =
   data.length > 1 && data[data.length - 1].portfolio_value > data[0].portfolio_value;
   
-  const BASE_URL =
-    import.meta.env.MODE === "development"
-      ? "http://127.0.0.1:8000"
-      : "https://quantvision-backend.onrender.com";
-
   async function runBacktest() {
     setLoading(true);
     try {
       const res = await fetch(
-        `${BASE_URL}/run_strategy?name=${strategy}&ticker=${ticker}`
+        `https://quantvision-backend.onrender.com/run_strategy?name=${strategy}&ticker=${ticker}`
       );
 
       const json = await res.json();
