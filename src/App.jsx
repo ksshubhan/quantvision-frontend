@@ -38,7 +38,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [strategy, setStrategy] = useState(""); // ⬅️ start empty
   const [ticker, setTicker] = useState("");     // ⬅️ start empty
-  const [notice, setNotice] = useState("");
+  const [notice, setNotice] = useState("The backend is waking up (Render free tier). Please wait a few seconds and try again.");
   const isPositiveTrend =
   data.length > 1 && data[data.length - 1].portfolio_value > data[0].portfolio_value;
   
@@ -50,8 +50,8 @@ function App() {
     try {
       // Show message if backend takes too long
       timeoutId = setTimeout(() => {
-        setNotice("⚙️ The backend is waking up (Render free tier). Please wait a few seconds and try again.");
-      }, 1000);
+        setNotice("The backend is waking up (Render free tier). Please wait a few seconds and try again.");
+      }, 8000);
 
       const res = await fetch(
         `https://quantvision-backend.onrender.com/run_strategy?name=${strategy}&ticker=${ticker}`
@@ -77,7 +77,7 @@ function App() {
       setNotice(""); // success, clear message
     } catch (err) {
       console.error("Error fetching backtest data:", err);
-      setNotice("⚙️ Backend may still be waking up. Try again in a few seconds.");
+      setNotice("Backend may still be waking up. Try again in a few seconds.");
     } finally {
       clearTimeout(timeoutId);
       setLoading(false);
