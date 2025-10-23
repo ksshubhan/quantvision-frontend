@@ -38,7 +38,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [strategy, setStrategy] = useState(""); // ⬅️ start empty
   const [ticker, setTicker] = useState("");     // ⬅️ start empty
-  const [notice, setNotice] = useState("The backend is waking up (Render free tier). Please wait a few seconds and try again.");
+  const [notice, setNotice] = useState("");
   const isPositiveTrend =
   data.length > 1 && data[data.length - 1].portfolio_value > data[0].portfolio_value;
   
@@ -50,7 +50,7 @@ function App() {
     try {
       // Show message if backend takes too long
       timeoutId = setTimeout(() => {
-        setNotice("⚙️ The backend is waking up (Render free tier). Please wait a few seconds and try again.");
+        setNotice("The backend is waking up (Render free tier). Please wait a few seconds and try again.");
         // fade out after 6 seconds
         setTimeout(() => setNotice(""), 6000);
       }, 8000);
@@ -63,7 +63,7 @@ function App() {
 
       const json = await res.json();
       if (!json.equity_curve) {
-        setNotice("⚙️ Backend returned no data. Please try again.");
+        setNotice("Backend returned no data. Please try again.");
         setData([]);
         setMetrics(null);
         setTimeout(() => setNotice(""), 4000); // fade out that message too
@@ -80,7 +80,7 @@ function App() {
       setNotice(""); // success, clear message
     } catch (err) {
       console.error("Error fetching backtest data:", err);
-      setNotice("⚙️ Backend may still be waking up. Try again in a few seconds.");
+      setNotice("Backend may still be waking up. Try again in a few seconds.");
       setTimeout(() => setNotice(""), 5000);
     } finally {
       clearTimeout(timeoutId);
