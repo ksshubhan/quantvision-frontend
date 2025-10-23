@@ -51,7 +51,7 @@ function App() {
       // Show message if backend takes too long
       timeoutId = setTimeout(() => {
         setNotice("⚙️ The backend is waking up (Render free tier). Please wait a few seconds and try again.");
-      }, 8000);
+      }, 1000);
 
       const res = await fetch(
         `https://quantvision-backend.onrender.com/run_strategy?name=${strategy}&ticker=${ticker}`
