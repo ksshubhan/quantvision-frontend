@@ -117,7 +117,7 @@ function App() {
           letterSpacing: "-0.5px",
         }}
       >
-        Quant Strategy Dashboard
+        QuantVision Dashboard
       </h1>
 
       {/* Run Button below title */}
