@@ -38,17 +38,35 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [strategy, setStrategy] = useState(""); // ⬅️ start empty
   const [ticker, setTicker] = useState("");     // ⬅️ start empty
+  const [notice, setNotice] = useState("");
   const isPositiveTrend =
   data.length > 1 && data[data.length - 1].portfolio_value > data[0].portfolio_value;
   
   async function runBacktest() {
     setLoading(true);
+    setNotice(""); // clear any old messages
+    let timeoutId;
+
     try {
+      // Show message if backend takes too long
+      timeoutId = setTimeout(() => {
+        setNotice("⚙️ The backend is waking up (Render free tier). Please wait a few seconds and try again.");
+      }, 8000);
+
       const res = await fetch(
         `https://quantvision-backend.onrender.com/run_strategy?name=${strategy}&ticker=${ticker}`
       );
 
+      clearTimeout(timeoutId);
+
       const json = await res.json();
+      if (!json.equity_curve) {
+        setNotice("⚙️ Backend returned no data. Please try again.");
+        setData([]);
+        setMetrics(null);
+        return;
+      }
+
       const formatted = json.equity_curve.map(([date, value]) => ({
         date,
         portfolio_value: value,
@@ -56,12 +74,16 @@ function App() {
 
       setData(formatted);
       setMetrics(json.metrics);
+      setNotice(""); // success, clear message
     } catch (err) {
       console.error("Error fetching backtest data:", err);
+      setNotice("⚙️ Backend may still be waking up. Try again in a few seconds.");
     } finally {
+      clearTimeout(timeoutId);
       setLoading(false);
     }
   }
+
 
   return (
     <div
@@ -107,6 +129,26 @@ function App() {
         >
           {loading ? "Running..." : "Run Backtest"}
         </button>
+
+        {notice && (
+          <p
+            style={{
+              color: "#555",
+              fontSize: "0.9rem",
+              marginTop: "0.8rem",
+              background: "#f9f9f9",
+              padding: "0.6rem 1rem",
+              borderRadius: "8px",
+              border: "1px solid #e0e0e0",
+              width: "fit-content",
+              maxWidth: "400px",
+              marginInline: "auto",
+              transition: "opacity 0.3s ease",
+            }}
+          >
+            {notice}
+          </p>
+        )}
       </div>
 
       {/* === Main Layout === */}
