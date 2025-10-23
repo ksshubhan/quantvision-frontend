@@ -50,7 +50,7 @@ function App() {
     try {
       // Show message if backend takes too long
       timeoutId = setTimeout(() => {
-        setNotice("The backend is waking up (Render free tier). Please wait a few seconds and try again.");
+        setNotice("The backend is waking up (Render free tier). This is normal on first load — please wait a few seconds.");
         // fade out after 6 seconds
         setTimeout(() => setNotice(""), 6000);
       }, 8000);
@@ -63,7 +63,7 @@ function App() {
 
       const json = await res.json();
       if (!json.equity_curve) {
-        setNotice("Backend returned no data. Please try again.");
+        setNotice("The backend is still initialising. This is expected on first load — please try again in a few seconds.");
         setData([]);
         setMetrics(null);
         setTimeout(() => setNotice(""), 4000); // fade out that message too
@@ -80,7 +80,7 @@ function App() {
       setNotice(""); // success, clear message
     } catch (err) {
       console.error("Error fetching backtest data:", err);
-      setNotice("Backend may still be waking up. Try again in a few seconds.");
+      setNotice("Connection issue or backend still waking up. Please retry in a few seconds — this can happen on first load.");
       setTimeout(() => setNotice(""), 5000);
     } finally {
       clearTimeout(timeoutId);
