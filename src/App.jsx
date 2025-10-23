@@ -50,7 +50,9 @@ function App() {
     try {
       // Show message if backend takes too long
       timeoutId = setTimeout(() => {
-        setNotice("The backend is waking up (Render free tier). Please wait a few seconds and try again.");
+        setNotice("⚙️ The backend is waking up (Render free tier). Please wait a few seconds and try again.");
+        // fade out after 6 seconds
+        setTimeout(() => setNotice(""), 6000);
       }, 8000);
 
       const res = await fetch(
@@ -64,6 +66,7 @@ function App() {
         setNotice("⚙️ Backend returned no data. Please try again.");
         setData([]);
         setMetrics(null);
+        setTimeout(() => setNotice(""), 4000); // fade out that message too
         return;
       }
 
@@ -77,12 +80,14 @@ function App() {
       setNotice(""); // success, clear message
     } catch (err) {
       console.error("Error fetching backtest data:", err);
-      setNotice("Backend may still be waking up. Try again in a few seconds.");
+      setNotice("⚙️ Backend may still be waking up. Try again in a few seconds.");
+      setTimeout(() => setNotice(""), 5000);
     } finally {
       clearTimeout(timeoutId);
       setLoading(false);
     }
   }
+
 
 
   return (
@@ -106,9 +111,9 @@ function App() {
       <h1
         style={{
           fontSize: "3rem",
+          marginTop: "1rem",
           fontWeight: 700,
           marginBottom: "2rem",
-          marginTop: "1rem",
           letterSpacing: "-0.5px",
         }}
       >
@@ -116,7 +121,18 @@ function App() {
       </h1>
 
       {/* Run Button below title */}
-      <div style={{ marginBottom: "2rem", position: "relative" }}>
+      <div
+        style={{
+          marginBottom: "2rem",
+          position: "relative",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          minHeight: "80px", // keeps layout consistent even before message appears
+        }}
+      >
+
         <button
           onClick={runBacktest}
           disabled={!strategy || !ticker || loading}
@@ -133,17 +149,20 @@ function App() {
         {notice && (
           <p
             style={{
-              color: "#555",
+              color: "#333",
               fontSize: "0.9rem",
-              marginTop: "0.8rem",
-              background: "#f9f9f9",
-              padding: "0.6rem 1rem",
-              borderRadius: "8px",
-              border: "1px solid #e0e0e0",
-              width: "fit-content",
-              maxWidth: "400px",
-              marginInline: "auto",
-              transition: "opacity 0.3s ease",
+              background: "#f3f4f6",
+              padding: "0.7rem 1.2rem",
+              borderRadius: "10px",
+              border: "1px solid #e5e7eb",
+              boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
+              marginTop: "1rem",
+              textAlign: "center",
+              lineHeight: "1.5",
+              animation: "fadeIn 0.4s ease-in-out",
+              transition: "opacity 0.5s ease",  // 👈 fade-out effect
+              opacity: notice ? 1 : 0,
+              maxWidth: "420px",
             }}
           >
             {notice}
