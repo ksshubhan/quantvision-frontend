@@ -277,6 +277,26 @@ function App() {
             </div>
           )}
         </div>
+
+        {/* === Bottom Popup Notice === */}
+        <div
+          style={{
+            position: "fixed",
+            bottom: "20px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            background: "#111",
+            color: "white",
+            padding: "0.7rem 1.2rem",
+            borderRadius: "12px",
+            fontSize: "0.85rem",
+            opacity: 0.95,
+            boxShadow: "0 4px 15px rgba(0,0,0,0.3)",
+            zIndex: 9999,
+          }}
+        >
+          ⚠️ On free hosting; the backend may take up to <strong>60 seconds</strong> to start.
+        </div>
       </div>
     </div>
   );
