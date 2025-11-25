@@ -287,16 +287,36 @@ function App() {
             transform: "translateX(-50%)",
             background: "#111",
             color: "white",
-            padding: "0.7rem 1.2rem",
-            borderRadius: "12px",
-            fontSize: "0.85rem",
-            opacity: 0.95,
-            boxShadow: "0 4px 15px rgba(0,0,0,0.3)",
+            padding: "1rem 1.4rem",
+            borderRadius: "14px",
+            fontSize: "0.9rem",
+            lineHeight: "1.45",
+            boxShadow: "0 4px 18px rgba(0,0,0,0.25)",
             zIndex: 9999,
+            maxWidth: "650px",
+            textAlign: "left",
+            display: "flex",
+            gap: "0.75rem",
+            alignItems: "flex-start",
           }}
         >
-          ⚠️ On free hosting; the backend may take up to <strong>60 seconds</strong> to start.
+          <span style={{ fontSize: "1.3rem", lineHeight: "1.3" }}>⚠️</span>
+
+          <div>
+            <span>
+              On free hosting, the backend may take up to <strong>60 seconds</strong> to start.
+            </span>
+            <br />
+            <span>
+              You may need to click <strong>Run Backtest</strong> more than once.
+            </span>
+            <br />
+            <span>
+              Changing the <strong>strategy</strong> or <strong>ticker</strong> requires running the backtest again.
+            </span>
+          </div>
         </div>
+
       </div>
     </div>
   );
